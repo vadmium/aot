@@ -1,0 +1,6 @@
+#include "resource.h"
+
+IDI_MAIN ICON main.ico /* 16 x 16 (first in the icon's
+directory, so that it is used on the system notification tray (whatever it's
+really called); also 32 x 32. This icon should be first in the
+resources because it it the icon for the exe file. */

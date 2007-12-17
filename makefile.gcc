@@ -1,0 +1,34 @@
+# Makefile for "Always on top" program, for GCC
+# By Martin Panter
+ 
+CXX = g++
+CXXFLAGS = -O2 -Wall
+#~ LINK = wlink
+#~ LINKFLAGS =
+
+EXENAME = aot
+RESNAME = resource
+#~ LIBS =
+OBJS = main.o $(RESNAME).o
+
+all: $(EXENAME).exe
+.PHONY: all
+
+#~ exec: .SYMBOLIC $(EXENAME).exe
+	#~ $(EXENAME).exe
+
+$(EXENAME).exe: $(OBJS)
+	g++ -mwindows -o $@ $(OBJS)
+	strip $@
+
+CXX_CMD = $(CXX) -c $(CXXFLAGS) -o $@ $<
+main.obj: main.cpp $(RESNAME).h
+	$(CXX_CMD)
+
+$(RESNAME).o: $(RESNAME).rc $(RESNAME).h main.ico
+	windres $< $@
+
+#~ clean: .PROCEDURE
+	#~ FOR %o IN ($(OBJS)) DO @del %o
+	#~ del $(RESNAME).res
+	#~ del $(EXENAME).exe
